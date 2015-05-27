@@ -1,3 +1,16 @@
+Changes made:
+1. Optimized the CRP
+	- asynchronized non-critical JS files
+	- compressed images
+	- added media="print" attribute to print.css
+	- minified css and html
+	- inlined css above the fold
+	- added a function to asynchronously load CSS
+2. Optimized FPS in pizza.html
+	- moved several variable declarations out of the loop in updatePositions()
+	- moved several variable declarations out of the loop in changePizzaSizes()
+
+
 ## Website Performance Optimization portfolio project
 
 Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
@@ -32,7 +45,7 @@ Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
 
 ####Part 2: Optimize Frames per Second in pizza.html
 
-To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js. 
+To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js.
 
 You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
 
