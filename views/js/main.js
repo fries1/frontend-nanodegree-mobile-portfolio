@@ -444,10 +444,12 @@ var resizePizzas = function(size) {
     return dx;
   }
 
-  // Iterates through pizza elements on the page and changes their widths
-  var allPizzas = document.querySelectorAll(".randomPizzaContainer");
+  // no need to fetch all Pizzas in every loop iteration
+  var allPizzas = document.getElementsByClassName("randomPizzaContainer");
+  // all Pizza have the same dx and width, therefore we calculate it just once
   var dx = determineDx(allPizzas[0], size);
   var newwidth = (allPizzas[0].offsetWidth + dx) + 'px';
+  // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
     for (var i = 0; i < allPizzas.length; i++) {
       allPizzas[i].style.width = newwidth;
@@ -465,9 +467,10 @@ var resizePizzas = function(size) {
 
 window.performance.mark("mark_start_generating"); // collect timing data
 
+// Here again a variable declaration is put before the loop body as it does change with each iteration
+var pizzasDiv = document.getElementById("randomPizzas");
 // This for-loop actually creates and appends all of the pizzas when the page loads
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -499,7 +502,8 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
+  // needs to be assigned just once, therefore moved out of the loop
+  var items = document.getElementsByClassName("mover");
   // moved the scrollTop fetching out of the for loop
   var length = items.length;
   var scrollT = document.body.scrollTop ;
@@ -523,9 +527,13 @@ window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
-  var cols = 8;
+  // Calculate the number of generated Pizzas based on client's screen resolution
+  var screenHeight = window.screen.availHeight;
+  var screenWidth = window.screen.availWidth;
+  var cols = Math.round(screenWidth / 240);
+  var totalNumberOfPizzas = cols * Math.round(screenHeight/200);
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  for (var i = 0; i < totalNumberOfPizzas; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
